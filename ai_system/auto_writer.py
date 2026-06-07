@@ -120,6 +120,13 @@ def save_article(result: dict) -> Path:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{result['keyword']} | マネーコンパス</title>
 <link rel="stylesheet" href="../../css/article.css">
+<style>
+article table { width:100%; border-collapse:collapse; margin:24px 0; }
+article table th { background:#1B3A6B; color:white; padding:10px 14px; text-align:left; font-size:14px; }
+article table td { padding:10px 14px; border-bottom:1px solid #eee; font-size:14px; }
+article table tr:nth-child(even) td { background:#f8f9fa; }
+.hero-image { border-radius:12px; }
+</style>
 </head>
 <body>
 <header>
@@ -127,6 +134,11 @@ def save_article(result: dict) -> Path:
     マネー<span style="color:#F5A623;">コンパス</span>
   </a>
 </header>
+<div class="hero-image" style="width:100%;height:280px;overflow:hidden;margin-bottom:32px;">
+  <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80&auto=format&fit=crop"
+       alt="カードローン・金融情報"
+       style="width:100%;height:100%;object-fit:cover;">
+</div>
 <div class="layout">
   <main>
     {result['html']}
