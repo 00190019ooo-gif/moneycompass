@@ -1,0 +1,8 @@
+.env
+API memo/
+__pycache__/
+*.pyc
+*.pyo
+ai_system/logs/
+*.db
+.DS_Store

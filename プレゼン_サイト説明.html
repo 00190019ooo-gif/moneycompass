@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マネーコンパス — サイト説明プレゼン</title>
+<style>
+:root {
+  --navy:#1B3A6B; --gold:#F5A623; --red:#E63946;
+  --bg:#0D0D1A; --white:#fff; --sub:#9CA3AF;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif; background:var(--bg); color:#fff; overflow:hidden; }
+
+/* スライドコンテナ */
+.deck { width:100vw; height:100vh; position:relative; }
+.slide {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  padding:60px; opacity:0; pointer-events:none;
+  transition:opacity 0.5s ease;
+}
+.slide.active { opacity:1; pointer-events:all; }
+
+/* ナビ */
+.nav {
+  position:fixed; bottom:32px; left:50%; transform:translateX(-50%);
+  display:flex; gap:12px; align-items:center; z-index:100;
+  background:rgba(255,255,255,0.07); backdrop-filter:blur(12px);
+  padding:12px 24px; border-radius:50px; border:1px solid rgba(255,255,255,0.1);
+}
+.nav button {
+  background:rgba(255,255,255,0.1); border:none; color:#fff;
+  width:40px; height:40px; border-radius:50%; font-size:18px;
+  cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center;
+}
+.nav button:hover { background:var(--gold); color:var(--navy); }
+.slide-counter { font-size:14px; color:var(--sub); min-width:60px; text-align:center; }
+.dot-nav { display:flex; gap:6px; }
+.dot {
+  width:8px; height:8px; border-radius:50%;
+  background:rgba(255,255,255,0.2); cursor:pointer; transition:all 0.2s;
+}
+.dot.active { background:var(--gold); width:24px; border-radius:4px; }
+
+/* ========== 共通部品 ========== */
+.badge {
+  display:inline-block; padding:6px 18px; border-radius:30px;
+  font-size:12px; font-weight:700; letter-spacing:2px;
+  border:1px solid; margin-bottom:20px;
+}
+.badge-gold { background:rgba(245,166,35,0.15); border-color:var(--gold); color:var(--gold); }
+.badge-blue { background:rgba(27,58,107,0.3); border-color:rgba(255,255,255,0.2); color:#aaa; }
+
+h1.hero-title {
+  font-size:clamp(36px,5vw,64px); font-weight:900; text-align:center;
+  line-height:1.2; margin-bottom:16px;
+}
+h1.hero-title em { color:var(--gold); font-style:normal; }
+.sub-text { color:var(--sub); font-size:18px; text-align:center; line-height:1.7; }
+
+/* ========== スライド背景 ========== */
+.s1 { background:radial-gradient(ellipse at 60% 40%,#1B3A6B 0%,#0D0D1A 60%); }
+.s2 { background:linear-gradient(135deg,#0D0D1A 0%,#0F1F3D 100%); }
+.s3 { background:#0D0D1A; }
+.s4 { background:linear-gradient(135deg,#0D0D1A 0%,#1A0D2E 100%); }
+.s5 { background:linear-gradient(135deg,#0D1A0D 0%,#0D0D1A 100%); }
+.s6 { background:radial-gradient(ellipse at 40% 60%,#1A0D00 0%,#0D0D1A 60%); }
+.s7 { background:radial-gradient(ellipse at 50% 50%,#0F1F3D 0%,#0D0D1A 70%); }
+
+/* ========== スライド2: 概要 ========== */
+.overview-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;
+  width:100%; max-width:900px; margin-top:32px;
+}
+.ov-card {
+  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
+  border-radius:16px; padding:28px 24px; text-align:center;
+}
+.ov-icon { font-size:40px; margin-bottom:12px; }
+.ov-title { font-size:16px; font-weight:700; color:var(--gold); margin-bottom:10px; }
+.ov-body { font-size:13px; color:var(--sub); line-height:1.8; }
+
+/* ========== スライド3: サイトプレビュー ========== */
+.preview-wrap {
+  width:100%; max-width:1000px;
+  display:grid; grid-template-columns:1fr 1.8fr; gap:32px; align-items:start;
+}
+.preview-explain h2 { font-size:28px; font-weight:900; margin-bottom:20px; line-height:1.4; }
+.preview-explain h2 span { color:var(--gold); }
+.feature-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.feature-list li {
+  display:flex; gap:12px; align-items:flex-start;
+  font-size:14px; line-height:1.6; color:rgba(255,255,255,0.85);
+}
+.feature-list li::before {
+  content:''; width:20px; height:20px; border-radius:50%;
+  background:var(--gold); display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; margin-top:2px; font-size:11px;
+}
+.browser-frame {
+  background:#1E1E2E; border-radius:12px; overflow:hidden;
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 24px 60px rgba(0,0,0,0.5);
+}
+.browser-bar {
+  background:#2A2A3E; padding:10px 16px; display:flex; gap:8px; align-items:center;
+}
+.browser-dot { width:10px; height:10px; border-radius:50%; }
+.bd-r{background:#FF5F57;} .bd-y{background:#FFBD2E;} .bd-g{background:#28C840;}
+.browser-url {
+  flex:1; background:rgba(255,255,255,0.07); border-radius:6px;
+  padding:4px 12px; font-size:11px; color:var(--sub); margin-left:8px;
+}
+.browser-body { height:340px; overflow:hidden; position:relative; }
+.browser-body iframe { width:100%; height:100%; border:none; transform-origin:top left; }
+
+/* ========== スライド4: 記事ページ ========== */
+.article-explain {
+  width:100%; max-width:1000px;
+  display:grid; grid-template-columns:1.8fr 1fr; gap:32px; align-items:start;
+}
+
+/* ========== スライド5: お金の流れ ========== */
+.money-flow {
+  display:flex; align-items:center; gap:0; width:100%; max-width:900px;
+}
+.flow-node {
+  flex:1; text-align:center; padding:24px 16px;
+  background:rgba(255,255,255,0.05); border-radius:16px;
+  border:1px solid rgba(255,255,255,0.1);
+}
+.flow-icon { font-size:40px; margin-bottom:10px; }
+.flow-label { font-size:13px; font-weight:700; margin-bottom:6px; }
+.flow-desc { font-size:12px; color:var(--sub); line-height:1.6; }
+.flow-arrow {
+  font-size:28px; color:var(--gold); margin:0 8px; flex-shrink:0;
+}
+.money-highlight {
+  background:linear-gradient(135deg,rgba(245,166,35,0.2),rgba(245,166,35,0.05));
+  border:2px solid var(--gold); border-radius:16px; padding:24px 40px;
+  text-align:center; margin-top:32px;
+}
+.money-amount { font-size:52px; font-weight:900; color:var(--gold); line-height:1; }
+.money-label { font-size:14px; color:var(--sub); margin-top:8px; }
+
+/* ========== スライド6: SEO戦略 ========== */
+.seo-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:20px;
+  width:100%; max-width:800px; margin-top:24px;
+}
+.seo-card {
+  background:rgba(255,255,255,0.05); border-radius:14px; padding:24px;
+  border-left:3px solid var(--gold);
+}
+.seo-title { font-size:15px; font-weight:700; color:var(--gold); margin-bottom:10px; }
+.seo-body { font-size:13px; color:var(--sub); line-height:1.8; }
+.kw-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+.kw-chip {
+  background:rgba(27,58,107,0.4); border:1px solid rgba(255,255,255,0.15);
+  padding:6px 14px; border-radius:20px; font-size:12px; color:#ddd;
+}
+.kw-chip.hot { border-color:var(--red); color:var(--red); background:rgba(230,57,70,0.1); }
+
+/* ========== スライド7: 収益シミュレーション ========== */
+.rev-bars { width:100%; max-width:700px; margin-top:24px; }
+.rev-row { display:flex; align-items:center; gap:16px; margin-bottom:20px; }
+.rev-label { width:80px; font-size:13px; color:var(--sub); flex-shrink:0; }
+.rev-bar-wrap { flex:1; background:rgba(255,255,255,0.06); border-radius:6px; height:36px; overflow:hidden; }
+.rev-bar {
+  height:100%; border-radius:6px; display:flex; align-items:center; padding:0 14px;
+  font-size:13px; font-weight:700; transition:width 1s ease;
+}
+.bar-3m  { width:8%;  background:linear-gradient(90deg,#2756A8,#3A7BD5); }
+.bar-6m  { width:30%; background:linear-gradient(90deg,#27A87A,#3AD5A0); }
+.bar-12m { width:70%; background:linear-gradient(90deg,var(--gold),#FFD166); color:#7A4F00; }
+.bar-24m { width:100%;background:linear-gradient(90deg,var(--red),#FF6B6B); }
+.rev-amount { width:120px; text-align:right; font-size:14px; font-weight:700; flex-shrink:0; }
+
+.final-msg {
+  text-align:center; margin-top:48px;
+  font-size:22px; font-weight:900; line-height:1.5;
+}
+.final-msg span { color:var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- ===== SLIDE 1: タイトル ===== -->
+  <div class="slide s1 active" id="s1">
+    <div class="badge badge-gold">BOSS向け社内プレゼン</div>
+    <h1 class="hero-title">
+      私たちが作る<br><em>マネーコンパス</em>とは<br>何か。
+    </h1>
+    <p class="sub-text" style="margin-top:20px;">
+      金融情報メディア × AI完全自動運営<br>
+      このサイトで月100万円を目指す
+    </p>
+    <p style="margin-top:48px;font-size:13px;color:rgba(255,255,255,0.3);">← → キーで移動 / 下のボタンでも移動できます</p>
+  </div>
+
+  <!-- ===== SLIDE 2: どんなサイトか ===== -->
+  <div class="slide s2" id="s2">
+    <div class="badge badge-blue">OVERVIEW</div>
+    <h2 style="font-size:36px;font-weight:900;text-align:center;margin-bottom:8px;">
+      一言で言うと<br><span style="color:var(--gold);">「お金を借りたい人向けの<br>比較メディアサイト」</span>
+    </h2>
+    <div class="overview-grid">
+      <div class="ov-card">
+        <div class="ov-icon">👤</div>
+        <div class="ov-title">誰が来るのか</div>
+        <div class="ov-body">「カードローン おすすめ」「即日融資」などをGoogleで検索している一般の人。全国に毎月数百万人いる。</div>
+      </div>
+      <div class="ov-card">
+        <div class="ov-icon">📖</div>
+        <div class="ov-title">何を提供するか</div>
+        <div class="ov-body">カードローン・消費者金融の比較情報をわかりやすく解説した記事。AIが毎日5本自動生成する。</div>
+      </div>
+      <div class="ov-card">
+        <div class="ov-icon">💰</div>
+        <div class="ov-title">どう稼ぐか</div>
+        <div class="ov-body">記事を読んだ人がアコム・プロミス等に申込むと、1件につき5,000〜20,000円の報酬が入る。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 3: トップページ ===== -->
+  <div class="slide s3" id="s3">
+    <div class="preview-wrap">
+      <div class="preview-explain">
+        <div class="badge badge-blue" style="margin-bottom:16px;">トップページ</div>
+        <h2><span>一目で</span>信頼感を<br>伝えるデザイン</h2>
+        <ul class="feature-list" style="margin-top:20px;">
+          <li>最新ランキングがすぐ目に入る。来た瞬間に「ここは使えるサイト」とわかる</li>
+          <li>申込みボタン（赤いボタン）が自然な流れで目に入る設計</li>
+          <li>「2026年5月最新版」など更新日を強調してGoogleの評価も上がる</li>
+          <li>スマホでも崩れないレスポンシブデザイン</li>
+        </ul>
+        <div style="margin-top:20px;background:rgba(245,166,35,0.1);border:1px solid var(--gold);border-radius:10px;padding:14px 18px;">
+          <div style="font-size:12px;color:var(--gold);font-weight:700;margin-bottom:6px;">🎯 収益ポイント</div>
+          <div style="font-size:13px;color:#ddd;">ページ上部のランキングカードに<br>アフィリエイトリンクが入っている</div>
+        </div>
+      </div>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dot bd-r"></div>
+          <div class="browser-dot bd-y"></div>
+          <div class="browser-dot bd-g"></div>
+          <div class="browser-url">moneycompass.jp</div>
+        </div>
+        <div class="browser-body">
+          <iframe src="index.html" style="width:167%;height:167%;transform:scale(0.6);transform-origin:top left;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 4: 記事ページ ===== -->
+  <div class="slide s4" id="s4">
+    <div class="article-explain">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dot bd-r"></div>
+          <div class="browser-dot bd-y"></div>
+          <div class="browser-dot bd-g"></div>
+          <div class="browser-url">moneycompass.jp/articles/cardloan-comparison</div>
+        </div>
+        <div class="browser-body">
+          <iframe src="articles/cardloan-comparison.html" style="width:167%;height:167%;transform:scale(0.6);transform-origin:top left;"></iframe>
+        </div>
+      </div>
+      <div>
+        <div class="badge badge-blue" style="margin-bottom:16px;">記事ページ</div>
+        <h2 style="font-size:28px;font-weight:900;line-height:1.4;margin-bottom:20px;">
+          AIが毎日<span style="color:var(--gold);">5本</span><br>自動で書く記事
+        </h2>
+        <ul class="feature-list">
+          <li>「カードローン 審査 甘い」などの検索ワードに完全最適化された構成</li>
+          <li>比較テーブルで視覚的にわかりやすく。申込みボタンを自然に配置</li>
+          <li>Q&A形式でGoogleに「専門性の高いページ」として認識させる</li>
+          <li>右サイドバーにもランキング → 記事を読んでいる間も誘導できる</li>
+        </ul>
+        <div style="margin-top:20px;background:rgba(27,58,107,0.3);border-radius:10px;padding:14px 18px;font-size:13px;color:#ddd;">
+          📝 1記事の生成コスト：<strong style="color:var(--gold);">約2〜5円</strong><br>
+          1記事から生まれる収益：<strong style="color:var(--gold);">数千〜数万円</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 5: お金の流れ ===== -->
+  <div class="slide s5" id="s5">
+    <div class="badge badge-blue">BUSINESS FLOW</div>
+    <h2 style="font-size:32px;font-weight:900;margin-bottom:32px;text-align:center;">
+      1件の申込みが<br><span style="color:var(--gold);">どうお金になるか</span>
+    </h2>
+    <div class="money-flow">
+      <div class="flow-node">
+        <div class="flow-icon">🔍</div>
+        <div class="flow-label">ユーザーが検索</div>
+        <div class="flow-desc">「カードローン おすすめ」とGoogleで検索する</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-icon">📄</div>
+        <div class="flow-label">記事を読む</div>
+        <div class="flow-desc">うちのサイトが検索上位に出て、記事を読む</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-icon">🖱️</div>
+        <div class="flow-label">ボタンをクリック</div>
+        <div class="flow-desc">「公式サイトで申込む」ボタンを押す</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-icon">✅</div>
+        <div class="flow-label">申込み完了</div>
+        <div class="flow-desc">アコム等の公式サイトで申込みが完了する</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:var(--gold);">
+        <div class="flow-icon">💴</div>
+        <div class="flow-label" style="color:var(--gold);">報酬が入る</div>
+        <div class="flow-desc">1件につき<strong style="color:var(--gold);">8,000円</strong>前後の報酬が振込まれる</div>
+      </div>
+    </div>
+    <div class="money-highlight">
+      <div style="font-size:14px;color:var(--sub);margin-bottom:4px;">月50件の申込みが成立すると</div>
+      <div class="money-amount">40万円</div>
+      <div class="money-label">× 8,000円 = 400,000円/月 ── これが全自動で入り続ける</div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 6: SEO戦略 ===== -->
+  <div class="slide s6" id="s6">
+    <div class="badge badge-blue">SEO STRATEGY</div>
+    <h2 style="font-size:32px;font-weight:900;text-align:center;margin-bottom:4px;">
+      どうやって<span style="color:var(--gold);">Googleで上位</span>に出すか
+    </h2>
+    <p style="color:var(--sub);font-size:14px;text-align:center;">GROW班が全自動で実行する戦略</p>
+    <div class="seo-grid">
+      <div class="seo-card">
+        <div class="seo-title">📝 大量コンテンツ戦略</div>
+        <div class="seo-body">AIが毎日5本、月150本の記事を生成。記事数が多いほどGoogleに「専門メディア」として評価される。</div>
+      </div>
+      <div class="seo-card">
+        <div class="seo-title">🎯 ロングテールキーワード</div>
+        <div class="seo-body">「カードローン 審査 甘い」など、具体的な検索ワードを狙う。競合が少なく上位に出やすい。</div>
+      </div>
+      <div class="seo-card">
+        <div class="seo-title">🔗 内部リンク設計</div>
+        <div class="seo-body">全記事から「主力ページ」へリンクを集中させる。Googleの評価を1ページに集中させる手法。</div>
+      </div>
+      <div class="seo-card">
+        <div class="seo-title">⏰ 鮮度の維持</div>
+        <div class="seo-body">毎月AIが既存記事を自動更新。「最新の情報があるサイト」としてGoogleの評価が上がり続ける。</div>
+      </div>
+    </div>
+    <div class="kw-chips">
+      <div class="kw-chip hot">カードローン 比較 🔥</div>
+      <div class="kw-chip hot">消費者金融 おすすめ 🔥</div>
+      <div class="kw-chip">即日融資 方法</div>
+      <div class="kw-chip">審査 甘い カードローン</div>
+      <div class="kw-chip">在籍確認 なし</div>
+      <div class="kw-chip hot">カードローン 無利息 🔥</div>
+      <div class="kw-chip">アコム 審査 時間</div>
+      <div class="kw-chip">プロミス 申込み</div>
+      <div class="kw-chip">専業主婦 借入</div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 7: 収益シミュレーション ===== -->
+  <div class="slide s7" id="s7">
+    <div class="badge badge-gold">REVENUE FORECAST</div>
+    <h2 style="font-size:32px;font-weight:900;text-align:center;margin-bottom:8px;">
+      収益の成長イメージ
+    </h2>
+    <p style="color:var(--sub);font-size:13px;text-align:center;margin-bottom:16px;">記事数が増えるほど、収益は加速度的に伸びる</p>
+    <div class="rev-bars">
+      <div class="rev-row">
+        <div class="rev-label">3ヶ月後</div>
+        <div class="rev-bar-wrap"><div class="rev-bar bar-3m">150記事</div></div>
+        <div class="rev-amount" style="color:#3A7BD5;">5〜10万円/月</div>
+      </div>
+      <div class="rev-row">
+        <div class="rev-label">6ヶ月後</div>
+        <div class="rev-bar-wrap"><div class="rev-bar bar-6m">500記事</div></div>
+        <div class="rev-amount" style="color:#27A87A;">30〜60万円/月</div>
+      </div>
+      <div class="rev-row">
+        <div class="rev-label">12ヶ月後</div>
+        <div class="rev-bar-wrap"><div class="rev-bar bar-12m">1,500記事</div></div>
+        <div class="rev-amount" style="color:var(--gold);">100〜200万円/月</div>
+      </div>
+      <div class="rev-row">
+        <div class="rev-label">24ヶ月後</div>
+        <div class="rev-bar-wrap"><div class="rev-bar bar-24m">3,000記事+</div></div>
+        <div class="rev-amount" style="color:var(--red);">300万円+/月</div>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:20px 28px;margin-top:20px;text-align:center;width:100%;max-width:700px;">
+      <div style="font-size:13px;color:var(--sub);margin-bottom:4px;">初期投資</div>
+      <div style="font-size:22px;font-weight:900;">月 <span style="color:var(--gold);">2,100円</span>（サーバー＋ドメイン）</div>
+      <div style="font-size:13px;color:var(--sub);margin-top:4px;">+ APIコスト 月3,000〜10,000円（記事生成分）</div>
+    </div>
+    <div class="final-msg">
+      Bossの月の作業：<span>1〜2時間</span>。あとはAIが全部やる。
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- ナビゲーション -->
+<div class="nav">
+  <button onclick="go(-1)">←</button>
+  <div class="dot-nav" id="dots"></div>
+  <span class="slide-counter" id="counter">1 / 7</span>
+  <button onclick="go(1)">→</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let cur = 0;
+
+function buildDots() {
+  const dc = document.getElementById('dots');
+  slides.forEach((_,i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i===0?' active':'');
+    d.onclick = () => goTo(i);
+    dc.appendChild(d);
+  });
+}
+
+function goTo(n) {
+  slides[cur].classList.remove('active');
+  document.querySelectorAll('.dot')[cur].classList.remove('active');
+  cur = (n + total) % total;
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.dot')[cur].classList.add('active');
+  document.getElementById('counter').textContent = `${cur+1} / ${total}`;
+}
+
+function go(dir) { goTo(cur + dir); }
+
+document.addEventListener('keydown', e => {
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') go(-1);
+});
+
+buildDots();
+</script>
+</body>
+</html>

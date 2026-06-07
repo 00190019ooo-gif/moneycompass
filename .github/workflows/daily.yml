@@ -1,0 +1,57 @@
+name: Daily - 記事自動生成 & Slack通知
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 毎日AM9時（日本時間）
+  workflow_dispatch:      # 手動実行ボタンも有効
+
+jobs:
+  write:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python 3.12 セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 依存パッケージをインストール
+        run: pip install anthropic python-dotenv requests
+
+      - name: 記事を5本自動生成
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: cd ai_system && python auto_writer.py --all
+
+      - name: 生成した記事をリポジトリにコミット
+        run: |
+          git config --global user.name "マネーコンパスAI"
+          git config --global user.email "actions@github.com"
+          git add articles/generated/ ai_system/keywords_queue.json ai_system/reports/ || true
+          git diff --staged --quiet || git commit -m "feat: AI記事自動生成 $(date +'%Y/%m/%d')"
+          git push || true
+
+      - name: Slackに完了通知
+        if: always()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: |
+          COUNT=$(ls articles/generated/*.html 2>/dev/null | wc -l)
+          DATE=$(date +'%Y/%m/%d')
+          python -c "
+import requests, os
+token = os.environ['SLACK_BOT_TOKEN']
+count = '$COUNT'
+date = '$DATE'
+msg = f'*[WRITE班 日次レポート] {date}*\n記事自動生成完了！\n累計記事数: {count}本\n--- SEC（秘書AI）'
+requests.post('https://slack.com/api/chat.postMessage',
+  headers={'Authorization': f'Bearer {token}'},
+  json={'channel': 'C0B8QE4ACS1', 'text': msg})
+"
