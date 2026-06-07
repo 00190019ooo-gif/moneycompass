@@ -83,13 +83,16 @@ HTMLの <article> タグで全体を囲んでください。"""
 
     raw_content = message.content[0].text
 
-    # プレースホルダーを実際のリンクに置換
+    # プレースホルダーを実際のリンクに置換（URLが空の場合はテキストのみ）
     html_content = raw_content
     for company, url in AFFILIATE_LINKS.items():
-        html_content = html_content.replace(
-            f"{{{{{company}}}}}",
-            f'<a href="{url}" target="_blank" rel="nofollow">【PR】{company}の公式サイトはこちら</a>'
-        )
+        if url:
+            html_content = html_content.replace(
+                f"{{{{{company}}}}}",
+                f'<a href="{url}" target="_blank" rel="nofollow sponsored" style="display:inline-block;background:#e8f0fe;color:#1a73e8;padding:4px 12px;border-radius:20px;font-weight:bold;text-decoration:none;">【PR】{company}の公式サイト →</a>'
+            )
+        else:
+            html_content = html_content.replace(f"{{{{{company}}}}}", company)
 
     result = {
         "keyword": keyword,
