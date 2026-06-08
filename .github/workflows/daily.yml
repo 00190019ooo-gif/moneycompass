@@ -2,8 +2,8 @@ name: Daily - 記事自動生成 & Slack通知
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 毎日AM9時（日本時間）
-  workflow_dispatch:      # 手動実行ボタンも有効
+    - cron: '0 0 * * *'
+  workflow_dispatch: {}
 
 jobs:
   write:
