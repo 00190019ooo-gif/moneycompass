@@ -83,6 +83,12 @@ HTMLの <article> タグで全体を囲んでください。"""
 
     raw_content = message.content[0].text
 
+    # AIの応答からは <article>...</article> 部分のみを抽出する
+    # （前後にコードフェンスや「記事生成完了」等の説明文が付くことがあるため）
+    article_match = re.search(r"<article>.*?</article>", raw_content, re.DOTALL)
+    if article_match:
+        raw_content = article_match.group(0)
+
     # プレースホルダーを実際のリンクに置換（URLが空の場合はテキストのみ）
     html_content = raw_content
     for company, url in AFFILIATE_LINKS.items():
