@@ -192,6 +192,9 @@ def run_daily_batch():
             path = save_article(result)
             results.append({"keyword": kw, "file": str(path), "status": "success"})
         except Exception as e:
+            import traceback
+            print(f"[DEBUG] {kw}: {type(e).__name__}: {e}")
+            traceback.print_exc()
             results.append({"keyword": kw, "status": "error", "error": str(e)})
 
     # 処理済みキーワードを移動
