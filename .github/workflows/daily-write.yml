@@ -43,15 +43,6 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         run: |
-          COUNT=$(ls articles/generated/*.html 2>/dev/null | wc -l)
-          DATE=$(date +'%Y/%m/%d')
-          python -c "
-import requests, os
-token = os.environ['SLACK_BOT_TOKEN']
-count = '$COUNT'
-date = '$DATE'
-msg = f'*[WRITE班 日次レポート] {date}*\n記事自動生成完了！\n累計記事数: {count}本\n--- SEC（秘書AI）'
-requests.post('https://slack.com/api/chat.postMessage',
-  headers={'Authorization': f'Bearer {token}'},
-  json={'channel': 'C0B8QE4ACS1', 'text': msg})
-"
+          export ARTICLE_COUNT=$(ls articles/generated/*.html 2>/dev/null | wc -l)
+          export REPORT_DATE=$(date +'%Y/%m/%d')
+          python ai_system/notify_slack.py
