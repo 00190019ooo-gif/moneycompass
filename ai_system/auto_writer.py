@@ -124,11 +124,11 @@ def save_article(result: dict) -> Path:
 <title>{result['keyword']} | マネーコンパス</title>
 <link rel="stylesheet" href="../../css/article.css">
 <style>
-article table { width:100%; border-collapse:collapse; margin:24px 0; }
-article table th { background:#1B3A6B; color:white; padding:10px 14px; text-align:left; font-size:14px; }
-article table td { padding:10px 14px; border-bottom:1px solid #eee; font-size:14px; }
-article table tr:nth-child(even) td { background:#f8f9fa; }
-.hero-image { border-radius:12px; }
+article table {{ width:100%; border-collapse:collapse; margin:24px 0; }}
+article table th {{ background:#1B3A6B; color:white; padding:10px 14px; text-align:left; font-size:14px; }}
+article table td {{ padding:10px 14px; border-bottom:1px solid #eee; font-size:14px; }}
+article table tr:nth-child(even) td {{ background:#f8f9fa; }}
+.hero-image {{ border-radius:12px; }}
 </style>
 </head>
 <body>
@@ -192,9 +192,6 @@ def run_daily_batch():
             path = save_article(result)
             results.append({"keyword": kw, "file": str(path), "status": "success"})
         except Exception as e:
-            import traceback
-            print(f"[DEBUG] {kw}: {type(e).__name__}: {e}")
-            traceback.print_exc()
             results.append({"keyword": kw, "status": "error", "error": str(e)})
 
     # 処理済みキーワードを移動
