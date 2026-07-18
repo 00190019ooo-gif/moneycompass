@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="32" fill="#0e1e3d"/>
+  <circle cx="32" cy="32" r="28" fill="none" stroke="#c8920a" stroke-width="2"/>
+  <circle cx="32" cy="32" r="24" fill="none" stroke="rgba(200,146,10,.25)" stroke-width="1"/>
+  <!-- 目盛り -->
+  <text x="32" y="13" text-anchor="middle" fill="#e8a81e" font-size="8" font-weight="900" font-family="sans-serif">N</text>
+  <text x="32" y="57" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="7" font-family="sans-serif">S</text>
+  <text x="11" y="35" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="7" font-family="sans-serif">W</text>
+  <text x="53" y="35" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="7" font-family="sans-serif">E</text>
+  <!-- 北針（金） -->
+  <polygon points="32,10 35,32 32,28 29,32" fill="#c8920a"/>
+  <!-- 南針（赤） -->
+  <polygon points="32,54 35,32 32,36 29,32" fill="#c9303a"/>
+  <!-- 中心 -->
+  <circle cx="32" cy="32" r="3.5" fill="#e8a81e"/>
+  <circle cx="32" cy="32" r="1.5" fill="#0e1e3d"/>
+</svg>
