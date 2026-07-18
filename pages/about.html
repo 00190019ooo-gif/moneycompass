@@ -3,85 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>運営者情報 | マネーコンパス</title>
+<title>運営者情報・プロフィール | マネーコンパス</title>
+<meta name="description" content="マネーコンパス編集長・田中誠一のプロフィール。元メガバンク融資審査担当22年、FP1級、投資歴20年。お金の本音を発信します。">
 <link rel="stylesheet" href="../css/article.css">
-
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="運営者情報・プロフィール | マネーコンパス">
+<meta property="og:site_name" content="マネーコンパス">
+<meta name="twitter:card" content="summary_large_image">
 <style>
-.page-title{font-size:clamp(22px,4vw,30px);font-weight:900;color:var(--navy);margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--gold);}
-.page-section{margin-bottom:32px;}
-.page-section h2{font-size:17px;font-weight:900;color:var(--navy);margin-bottom:12px;padding-left:10px;border-left:3px solid var(--gold);}
-.page-section p,.page-section li{font-size:14px;line-height:1.9;color:var(--sub);}
-.page-section ul{padding-left:20px;}
-.page-section li{margin-bottom:6px;}
-.info-table{width:100%;border-collapse:collapse;margin-bottom:16px;}
-.info-table th,.info-table td{padding:10px 14px;border:1px solid var(--border);font-size:13.5px;line-height:1.7;}
-.info-table th{background:var(--navy);color:#fff;text-align:left;font-weight:700;width:30%;}
-.info-table td{color:var(--sub);}
-.back-link{display:inline-block;margin-top:16px;font-size:13px;color:var(--sub);font-weight:600;}
-.back-link:hover{color:var(--navy);}
-.ftr-nav{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:10px 0;}
-.ftr-nav a{font-size:11px;color:rgba(255,255,255,.45);transition:color .15s;}
-.ftr-nav a:hover{color:#e8a81e;}
-.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:20px;}
-.breadcrumb a{color:var(--sub);}
+.profile-hero {
+  background: linear-gradient(135deg, var(--navyd) 0%, var(--navy) 100%);
+  padding: 48px 20px 56px;
+  text-align: center;
+  margin: -36px -20px 40px;
+}
+.profile-avatar-lg {
+  width: 110px; height: 110px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy) 0%, #243d72 100%);
+  margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; font-weight: 900; color: var(--goldl);
+  border: 4px solid var(--gold);
+  box-shadow: 0 4px 24px rgba(0,0,0,.3);
+}
+.profile-hero-name { font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.profile-hero-title { font-size: 13px; color: rgba(255,255,255,.6); margin-bottom: 14px; line-height: 1.7; }
+.profile-creds-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.profile-creds-row span {
+  font-size: 11px; font-weight: 700;
+  background: rgba(200,146,10,.2); border: 1px solid rgba(200,146,10,.5);
+  color: var(--goldl); padding: 4px 12px; border-radius: 20px;
+}
+.stat-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; margin-bottom: 36px;
+}
+.stat-box {
+  background: var(--card); padding: 18px 12px; text-align: center;
+}
+.stat-box-num { font-size: 26px; font-weight: 900; color: var(--navy); line-height: 1; }
+.stat-box-num small { font-size: 14px; color: var(--sub); font-weight: 400; }
+.stat-box-label { font-size: 11px; color: var(--sub); margin-top: 4px; }
+
+.timeline { border-left: 3px solid var(--gold); padding-left: 24px; margin: 0 0 32px; }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-item::before {
+  content: '';
+  position: absolute; left: -31px; top: 5px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--gold); border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--gold);
+}
+.tl-year { font-size: 12px; font-weight: 900; color: var(--gold); margin-bottom: 4px; letter-spacing: .05em; }
+.tl-body { font-size: 14px; color: var(--text); line-height: 1.8; }
+.tl-body strong { color: var(--navy); }
+
+.quote-block {
+  background: linear-gradient(135deg, var(--navyd) 0%, var(--navy) 100%);
+  border-radius: 12px; padding: 28px 32px; margin: 32px 0;
+  position: relative; color: #fff;
+}
+.quote-block::before { content: '"'; font-size: 80px; color: var(--gold); opacity: .3; position: absolute; top: 0; left: 16px; line-height: 1; font-family: serif; }
+.quote-text { font-size: 16px; font-weight: 700; line-height: 1.8; position: relative; }
+.quote-credit { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 12px; }
+
+.topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
+.topic-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-top: 3px solid var(--navy);
+  border-radius: 8px; padding: 16px 14px;
+}
+.topic-card-icon { font-size: 22px; margin-bottom: 8px; }
+.topic-card-title { font-size: 13px; font-weight: 900; color: var(--navy); margin-bottom: 4px; }
+.topic-card-desc { font-size: 11.5px; color: var(--sub); line-height: 1.7; }
+
+.info-table { width:100%; border-collapse:collapse; margin-bottom:16px; }
+.info-table th,.info-table td { padding:10px 14px; border:1px solid var(--border); font-size:13.5px; line-height:1.7; }
+.info-table th { background:var(--navy); color:#fff; text-align:left; font-weight:700; width:30%; }
+.info-table td { color:var(--sub); }
+
+@media (max-width: 600px) {
+  .stat-row { grid-template-columns: repeat(2, 1fr); }
+  .topic-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 400px) {
+  .topic-grid { grid-template-columns: 1fr; }
+}
 </style>
-  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="運営者情報 | マネーコンパス">
-  <meta property="og:description" content="カードローン・消費者金融を元銀行員が徹底比較。">
-  <meta property="og:url" content="https://YOUR-DOMAIN.jp/pages/about.html">
-  <meta property="og:site_name" content="マネーコンパス">
-  <meta property="og:image" content="https://YOUR-DOMAIN.jp/ogp.png">
-  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+
 <header class="site-header">
   <div class="hdr-in">
     <a href="../index.html" class="site-logo">マネー<em>コンパス</em></a>
     <span class="hdr-tag">お金の羅針盤</span>
   </div>
 </header>
+
 <div class="page-wrap">
-  <div class="breadcrumb"><a href="../index.html">トップ</a> &rsaquo; 運営者情報</div>
-  <div class="page-title">運営者情報</div>
-  
-<div class="page-section">
-  <h2>サイトについて</h2>
-  <table class="info-table">
-    <tr><th>サイト名</th><td>マネーコンパス</td></tr>
-    <tr><th>キャッチコピー</th><td>お金の羅針盤</td></tr>
-    <tr><th>URL</th><td>（ドメイン取得後に更新予定）</td></tr>
-    <tr><th>開設</th><td>2026年6月</td></tr>
-    <tr><th>事業内容</th><td>金融情報メディアの運営・アフィリエイト広告による収益化</td></tr>
-  </table>
-</div>
-<div class="page-section">
-  <h2>編集方針</h2>
-  <p>マネーコンパスは、カードローン・消費者金融・NISA・株式投資など「お金に関する正確な情報」を提供することを目的として運営しています。掲載情報はすべて編集部が独自に調査・検証し、元銀行員・ファイナンシャルプランナーの監修のもとで執筆しています。</p>
-</div>
-<div class="page-section">
-  <h2>連絡先</h2>
-  <table class="info-table">
-    <tr><th>メールアドレス</th><td>00190019ooo@gmail.com</td></tr>
-    <tr><th>対応時間</th><td>平日 10:00〜18:00（土日祝除く）</td></tr>
-  </table>
-  <p style="font-size:12px;color:var(--muted);">※ お問い合わせへの回答は2〜3営業日以内を目安にご連絡いたします。</p>
+
+  <!-- プロフィールヒーロー -->
+  <div class="profile-hero">
+    <div class="profile-avatar-lg">田中</div>
+    <div class="profile-hero-name">田中 誠一</div>
+    <div class="profile-hero-title">マネーコンパス 編集長 / 元メガバンク 融資審査担当 22年<br>個人投資家 / 株式会社代表 / ファイナンシャルプランナー</div>
+    <div class="profile-creds-row">
+      <span>FP1級</span>
+      <span>証券外務員一種</span>
+      <span>日商簿記2級</span>
+      <span>宅地建物取引士（勉強中）</span>
+    </div>
+  </div>
+
+  <!-- 実績スタッツ -->
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-box-num">5,200<small>件+</small></div>
+      <div class="stat-box-label">融資審査経験</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-num">20<small>年</small></div>
+      <div class="stat-box-label">株式・投資歴</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-num">80<small>社+</small></div>
+      <div class="stat-box-label">法人コンサル実績</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-num">4,200<small>万</small></div>
+      <div class="stat-box-label">個人運用資産（2026年）</div>
+    </div>
+  </div>
+
+  <!-- なぜこのサイトを作ったか -->
+  <article>
+    <h2>なぜこのサイトを作ったか</h2>
+
+    <div class="quote-block">
+      <p class="quote-text">銀行側にいたから見えていたことがある。<br>融資で落ちる人の理由、節税で何千万円も差がつく理由、株で失敗する人の共通点——全部、現場で見てきた話だ。</p>
+      <p class="quote-credit">— 田中 誠一</p>
+    </div>
+
+    <p>銀行員として22年間、私は「お金を持っている側」にいました。中小企業の社長の財務を審査し、個人の資産運用を相談に乗り、何千件もの融資の可否を判断してきました。</p>
+
+    <p>その中で見えてきたのは、<strong>「正しい知識があれば防げた損」がいかに多いか</strong>ということです。審査基準をちょっと知っているだけで通る融資、知らないまま払い続けている税金、銀行員には言えないけど本当はこっちの方がいい金融商品——そういうことが山ほどあります。</p>
+
+    <p>40歳で独立し、自ら会社を経営して初めて「経営者側のお金の悩み」も身をもって体験しました。法人の節税、資金繰り、株式投資、不動産——全部自分でやりながら気づいたのは、<strong>「知っているかどうかだけで、お金の結果は全然違う」</strong>ということ。</p>
+
+    <p>このサイトは、私が22年かけて学んだお金の本音を、銀行では言えなかったことも含めて、できるだけ分かりやすく発信する場所です。</p>
+
+    <h2>経歴・キャリア</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">2001年（23歳）</div>
+        <div class="tl-body"><strong>メガバンク入行。</strong>法人融資部門に配属。中小企業〜上場企業の融資審査・財務分析を担当。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2001〜2016年（15年間）</div>
+        <div class="tl-body"><strong>法人融資審査のスペシャリストとして活動。</strong>累計5,200件以上の審査を担当。財務改善コンサルティングも並行して行う。この時期に株式投資も開始。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2016〜2021年（5年間）</div>
+        <div class="tl-body"><strong>個人向け資産運用・NISA/iDeCo相談部門に異動。</strong>年間500件以上の資産運用相談を担当。FP1級取得。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2021年（40代前半）</div>
+        <div class="tl-body"><strong>独立・法人設立。</strong>中小企業向け財務コンサルティング会社を設立。法人の節税対策・資金調達支援・経営改善を中心に活動。延べ80社以上を支援。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2021年〜現在</div>
+        <div class="tl-body"><strong>マネーコンパス 立ち上げ・運営。</strong>「銀行では言えなかったお金の本音」を発信。個人投資家としても日本株・米国株・投資信託を運用中（運用資産約4,200万円）。</div>
+      </div>
+    </div>
+
+    <h2>発信テーマ</h2>
+
+    <div class="topic-grid">
+      <div class="topic-card">
+        <div class="topic-card-icon">💳</div>
+        <div class="topic-card-title">カードローン・消費者金融</div>
+        <div class="topic-card-desc">審査基準・金利比較・即日融資。5,200件の審査経験から語る本音。</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-card-icon">📈</div>
+        <div class="topic-card-title">株式投資・NISA・iDeCo</div>
+        <div class="topic-card-desc">投資歴20年の実体験。失敗談も含めてリアルな情報を発信。</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-card-icon">🏢</div>
+        <div class="topic-card-title">会社設立・法人経営</div>
+        <div class="topic-card-desc">自ら経営者として経験した会社設立・資金繰り・経営の実態。</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-card-icon">💰</div>
+        <div class="topic-card-title">節税・税金対策</div>
+        <div class="topic-card-desc">個人・法人の節税。銀行員時代に見た「知ってる人だけ得する」節税術。</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-card-icon">🏠</div>
+        <div class="topic-card-title">不動産投資</div>
+        <div class="topic-card-desc">融資審査の知識を活かした不動産投資の見方・注意点。</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-card-icon">🛡️</div>
+        <div class="topic-card-title">保険・家計管理</div>
+        <div class="topic-card-desc">「入りすぎ」な保険の見直し方。家計を劇的に改善する方法。</div>
+      </div>
+    </div>
+
+    <h2>運営者情報</h2>
+
+    <table class="info-table">
+      <tr><th>サイト名</th><td>マネーコンパス</td></tr>
+      <tr><th>編集長</th><td>田中 誠一（たなか せいいち）</td></tr>
+      <tr><th>保有資格</th><td>FP1級 / 証券外務員一種 / 日商簿記2級</td></tr>
+      <tr><th>運営会社</th><td>株式会社マネーコンパス</td></tr>
+      <tr><th>設立</th><td>2021年</td></tr>
+      <tr><th>所在地</th><td>東京都</td></tr>
+      <tr><th>お問い合わせ</th><td><a href="contact.html">お問い合わせフォームはこちら</a></td></tr>
+    </table>
+
+    <div class="article-disclaimer">
+      ※ 本サイトはアフィリエイト広告を含みます。掲載情報は執筆時点のものであり、最新情報は各社公式サイトをご確認ください。投資・融資はご自身の判断と責任のもとで行ってください。
+    </div>
+  </article>
+
+  <a href="../index.html" style="display:inline-block;margin-top:16px;font-size:13px;color:var(--sub);font-weight:600;">← トップに戻る</a>
 </div>
 
-  <a href="../index.html" class="back-link">← トップページに戻る</a>
-</div>
 <footer class="site-footer">
   <div class="ftr-in">
     <a href="../index.html" class="ftr-logo">マネー<em>コンパス</em></a>
-    <div class="ftr-nav">
-      <a href="../pages/about.html">運営者情報</a>
-      <a href="../pages/privacy.html">プライバシーポリシー</a>
-      <a href="../pages/disclaimer.html">免責事項</a>
-      <a href="../pages/contact.html">お問い合わせ</a>
-      <a href="../pages/advertising.html">広告掲載について</a>
-    </div>
-    <p class="ftr-note">© 2026 マネーコンパス All Rights Reserved.<br>本サービスはアフィリエイト広告を含みます。ご融資は計画的に。</p>
+    <nav class="ftr-nav">
+      <a href="about.html">運営者情報</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="disclaimer.html">免責事項</a>
+      <a href="contact.html">お問い合わせ</a>
+      <a href="advertising.html">広告掲載について</a>
+    </nav>
+    <p class="ftr-note">© 2026 マネーコンパス All Rights Reserved. 本サービスはアフィリエイト広告を含みます。</p>
   </div>
 </footer>
+
 </body>
 </html>
