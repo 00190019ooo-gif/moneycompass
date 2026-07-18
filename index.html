@@ -314,6 +314,46 @@ footer { background: var(--navy-d); color: rgba(255,255,255,0.65); padding: 48px
 }
 .footer-copy { font-size: 11px; color: rgba(255,255,255,0.22); text-align: center; }
 
+/* ===== プロフィール ===== */
+.profile-section { background: var(--white); border-top: 4px solid var(--gold); padding: 72px 20px; }
+.profile-wrap { display: flex; gap: 48px; align-items: flex-start; max-width: 960px; margin: 0 auto; }
+.profile-left { flex-shrink: 0; width: 200px; text-align: center; }
+.profile-avatar {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  margin: 0 auto 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; font-weight: 900; color: var(--gold-light);
+  border: 4px solid var(--gold);
+  box-shadow: 0 4px 24px rgba(26,51,96,.25);
+  letter-spacing: -.03em;
+}
+.profile-name { font-size: 20px; font-weight: 900; color: var(--navy); margin-bottom: 4px; }
+.profile-title { font-size: 12px; color: var(--text-sub); margin-bottom: 14px; line-height: 1.6; }
+.profile-creds { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-bottom: 22px; }
+.profile-creds span { font-size: 10px; background: rgba(26,51,96,.07); color: var(--navy); border: 1px solid var(--border); padding: 3px 8px; border-radius: 12px; font-weight: 700; }
+.profile-stats { background: var(--bg); border-radius: 12px; padding: 16px 12px; display: flex; flex-direction: column; gap: 14px; }
+.pstat { text-align: left; }
+.pstat-num { font-size: 22px; font-weight: 900; color: var(--navy); line-height: 1; }
+.pstat-num small { font-size: 13px; color: var(--text-sub); font-weight: 400; }
+.pstat-label { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
+.profile-right { flex: 1; }
+.profile-eyebrow { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: .12em; margin-bottom: 10px; text-transform: uppercase; }
+.profile-heading { font-size: clamp(20px, 3vw, 28px); font-weight: 900; color: var(--navy); line-height: 1.35; margin-bottom: 18px; }
+.profile-quote {
+  background: var(--bg); border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0; padding: 16px 20px; margin-bottom: 18px;
+  font-size: 14.5px; color: var(--text); line-height: 1.9; font-style: italic;
+}
+.profile-story { font-size: 14px; color: var(--text-sub); line-height: 1.9; margin-bottom: 18px; }
+.profile-topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+.profile-topics span { font-size: 11px; font-weight: 700; background: var(--navy); color: #fff; padding: 5px 12px; border-radius: 20px; }
+.profile-link {
+  display: inline-block; font-size: 13px; font-weight: 700; color: var(--navy);
+  border-bottom: 2px solid var(--gold); padding-bottom: 2px; transition: color .15s;
+}
+.profile-link:hover { color: var(--gold); }
+
 /* ===== レスポンシブ ===== */
 @media (max-width: 768px) {
   nav { display: none; }
@@ -321,6 +361,9 @@ footer { background: var(--navy-d); color: rgba(255,255,255,0.65); padding: 48px
   .rank-cta { grid-column: 1 / -1; padding: 16px; text-align: center; }
   .hero-stats { gap: 24px; }
   .rank-header { flex-wrap: wrap; }
+  .profile-wrap { flex-direction: column; }
+  .profile-left { width: 100%; }
+  .profile-stats { flex-direction: row; flex-wrap: wrap; justify-content: space-around; }
 }
 @media (max-width: 480px) {
   .rank-body { grid-template-columns: 1fr; }
@@ -574,6 +617,64 @@ footer { background: var(--navy-d); color: rgba(255,255,255,0.65); padding: 48px
     <div class="ranking-note">
       <strong>⚠️ ご利用前にお読みください</strong>
       掲載情報は2026年6月時点のものです。金利・審査条件は各社状況により変更されます。ご契約の際は必ず公式サイトをご確認ください。本サービスは融資・仲介を行うものではありません。ご融資は計画的に。
+    </div>
+  </div>
+</section>
+
+<!-- ===== 運営者プロフィール ===== -->
+<section class="profile-section" id="about-editor">
+  <div class="container">
+    <div class="profile-wrap">
+      <div class="profile-left">
+        <div class="profile-avatar">田中</div>
+        <div class="profile-name">田中 誠一</div>
+        <div class="profile-title">マネーコンパス 編集長<br>元メガバンク 融資審査担当</div>
+        <div class="profile-creds">
+          <span>FP1級</span>
+          <span>証券外務員一種</span>
+          <span>日商簿記2級</span>
+        </div>
+        <div class="profile-stats">
+          <div class="pstat">
+            <div class="pstat-num">5,200<small>件+</small></div>
+            <div class="pstat-label">融資審査経験</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">20<small>年</small></div>
+            <div class="pstat-label">株式・投資歴</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">80<small>社+</small></div>
+            <div class="pstat-label">法人コンサル実績</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">4,200<small>万円</small></div>
+            <div class="pstat-label">個人運用資産（2026年）</div>
+          </div>
+        </div>
+      </div>
+      <div class="profile-right">
+        <div class="profile-eyebrow">このサイトについて</div>
+        <h2 class="profile-heading">銀行員22年の本音を、<br>包み隠さず発信します。</h2>
+        <div class="profile-quote">
+          「銀行側にいたから見えていたことがある。融資で落ちる会社の理由、節税で何千万円も差がつく理由、株で失敗する人の共通点——全部、現場で見てきた話です。」
+        </div>
+        <p class="profile-story">
+          メガバンクで15年間・中小企業の融資審査と財務コンサルを担当後、個人向け資産運用部門で5年。40歳で独立し自ら会社を経営しながら、株式投資・節税・不動産まで全て実践中。「知っているかどうかだけで、人生のお金の結果は全然違う」——それがこのサイトを作った理由です。
+        </p>
+        <div class="profile-topics">
+          <span>カードローン</span>
+          <span>消費者金融</span>
+          <span>株式投資</span>
+          <span>NISA・iDeCo</span>
+          <span>節税対策</span>
+          <span>会社設立・経営</span>
+          <span>不動産投資</span>
+          <span>保険</span>
+          <span>家計管理</span>
+        </div>
+        <a href="pages/about.html" class="profile-link">詳しいプロフィールを見る →</a>
+      </div>
     </div>
   </div>
 </section>
