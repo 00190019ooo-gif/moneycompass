@@ -20,15 +20,40 @@ from wp_poster import post_to_wordpress
 load_dotenv(Path(__file__).parent.parent / ".env")
 API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 
-# アフィリエイトリンク（登録後に実際のURLを入れる）
+# カテゴリ判定キーワード
+CATEGORY_RULES = {
+    "stocks":   ["NISA", "nisa", "iDeCo", "ideco", "株", "証券", "ETF", "投資信託", "配当", "米国株", "S&P"],
+    "setsuzei": ["節税", "会社設立", "法人", "確定申告", "ふるさと納税", "役員報酬", "経費", "副業", "法人成り"],
+}
+
+def detect_category(keyword: str) -> str:
+    for cat, words in CATEGORY_RULES.items():
+        if any(w in keyword for w in words):
+            return cat
+    return "cardloan"
+
+# カテゴリ別アフィリエイトリンク
 AFFILIATE_LINKS = {
-    "セントラル": "https://px.a8.net/svt/ejp?a8mat=4B5Q85+2HB1IQ+363I+64C3M",
-    "資金調達プロ": "https://px.a8.net/svt/ejp?a8mat=4B5Q85+39VUK2+40JM+TYJ5U",
-    "アコム":    "",  # 提携申請後に追加
-    "プロミス":  "",  # 提携申請後に追加
-    "アイフル":  "",  # 提携申請後に追加
-    "レイク":    "",  # 提携申請後に追加
-    "モビット":  "",  # 提携申請後に追加
+    "cardloan": {
+        "セントラル": "https://px.a8.net/svt/ejp?a8mat=4B5Q85+2HB1IQ+363I+64C3M",
+        "資金調達プロ": "https://px.a8.net/svt/ejp?a8mat=4B5Q85+39VUK2+40JM+TYJ5U",
+        "アコム":   "",
+        "プロミス": "",
+        "アイフル": "",
+        "レイク":   "",
+        "モビット": "",
+    },
+    "stocks": {
+        "楽天証券": "",  # 提携申請後に追加
+        "SBI証券":  "",  # 提携申請後に追加
+        "松井証券": "",
+        "マネックス証券": "",
+    },
+    "setsuzei": {
+        "freee": "",      # 会計ソフト
+        "マネーフォワード": "",
+        "弥生会計": "",
+    },
 }
 
 # 出力先
@@ -38,60 +63,109 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 # ==========================================
 # 記事生成エンジン（WRITE班の中枢）
 # ==========================================
-SYSTEM_PROMPT = """あなたはマネーコンパス株式会社のWRITE班AIです。
-金融情報メディアサイト向けのSEO最適化された記事を生成します。
+SYSTEM_PROMPTS = {
+    "cardloan": """あなたはマネーコンパス株式会社のWRITE班AIです。
+カードローン・消費者金融専門の金融情報メディア記事を生成します。
 
 【必ず守るルール】
 - 「必ず審査通過」「審査なし保証」等の断定表現を使わない（景表法違反）
 - アフィリエイトリンクは必ず「広告」「PR」と明記する
-- 金利・条件は「○○年○月現在」と時点を明記する
-- 文字数：2,500〜3,500文字
-- HTML形式で出力する
+- 金利・条件は「2026年現在」と時点を明記する
+- 文字数：2,500〜3,500文字・HTML形式で出力する
+- 執筆者は「田中誠一（元メガバンク融資審査担当・FP1級）」
 
 【記事構成】
-1. メタタグ情報（title, description）
-2. 導入リード文（200字）
-3. H2「〇〇ランキング TOP5」+ 比較テーブル
-4. H2「選ぶときの注意点」
+1. 導入リード文（200字）
+2. H2「〇〇ランキング TOP5」+ 比較テーブル
+3. H2「選ぶときの注意点」
+4. H2「よくある質問（Q&A）」3問
+5. まとめ・CTA（アフィリエイトリンク）
+""",
+
+    "stocks": """あなたはマネーコンパス株式会社のWRITE班AIです。
+株式投資・NISA・iDeCo・証券口座専門の金融メディア記事を生成します。
+
+【必ず守るルール】
+- 「必ず儲かる」「元本保証」等の断定表現を使わない（金融商品取引法）
+- 「投資はご自身の判断と責任のもとで行ってください」を必ず記載
+- アフィリエイトリンクは必ず「PR」と明記する
+- 情報は「2026年現在」と時点を明記する
+- 文字数：2,500〜3,500文字・HTML形式で出力する
+- 執筆者は「田中誠一（投資歴20年・元銀行資産運用部門・FP1級・証券外務員一種）」
+
+【記事構成】
+1. 導入リード文（200字）
+2. H2「〇〇おすすめランキング」+ 比較テーブル
+3. H2「始め方・手順」
+4. H2「注意点・失敗しないコツ」
+5. H2「よくある質問（Q&A）」3問
+6. まとめ・CTA（証券口座開設アフィリエイトリンク）
+""",
+
+    "setsuzei": """あなたはマネーコンパス株式会社のWRITE班AIです。
+節税対策・会社設立・法人経営専門の金融メディア記事を生成します。
+
+【必ず守るルール】
+- 「必ず節税できる」等の断定を避け「〜の可能性があります」と表現する
+- 「税務については税理士にご相談ください」を必ず記載
+- アフィリエイトリンクは必ず「PR」と明記する
+- 情報は「2026年現在」と時点を明記する
+- 文字数：2,500〜3,500文字・HTML形式で出力する
+- 執筆者は「田中誠一（元メガバンク融資審査担当22年・法人コンサル80社以上・日商簿記2級・FP1級）」
+
+【記事構成】
+1. 導入リード文（200字）
+2. H2「〇〇の方法・手順」
+3. H2「具体的な節税額シミュレーション」
+4. H2「注意点・よくある失敗」
 5. H2「よくある質問（Q&A）」3問
 6. まとめ・CTA
-"""
+""",
+}
 
 
 def generate_article(keyword: str) -> dict:
     """キーワードからSEO記事を生成する"""
     client = anthropic.Anthropic(api_key=API_KEY)
+    category = detect_category(keyword)
+    system_prompt = SYSTEM_PROMPTS[category]
+    affiliate_links = AFFILIATE_LINKS[category]
 
-    print(f"[WRITE班] 記事生成開始: {keyword}")
+    placeholder_list = " ".join(f"{{{{{k}}}}}" for k in affiliate_links.keys())
+
+    reader_map = {
+        "cardloan": "借入を検討している一般の方",
+        "stocks":   "投資・資産運用に興味がある方",
+        "setsuzei": "節税・法人経営に興味がある方や経営者",
+    }
+
+    print(f"[WRITE班] 記事生成開始: {keyword} (カテゴリ: {category})")
 
     message = client.messages.create(
-        model="claude-haiku-4-5-20251001",  # コスト最適化（記事生成はHaikuで十分）
+        model="claude-haiku-4-5-20251001",
         max_tokens=5000,
-        system=SYSTEM_PROMPT,
+        system=system_prompt,
         messages=[{
             "role": "user",
             "content": f"""以下のキーワードでSEO記事を生成してください。
 
 メインキーワード：{keyword}
-対象読者：借入を検討している一般の方
+対象読者：{reader_map[category]}
 記事の目的：情報提供 + アフィリエイト誘導
 
-アフィリエイトリンクは {{{{アコム}}}} {{{{プロミス}}}} {{{{アイフル}}}} {{{{レイク}}}} {{{{モビット}}}} のプレースホルダーで挿入してください。
+アフィリエイトリンクは {placeholder_list} のプレースホルダーで挿入してください。
 HTMLの <article> タグで全体を囲んでください。"""
         }]
     )
 
     raw_content = message.content[0].text
 
-    # AIの応答からは <article>...</article> 部分のみを抽出する
-    # （前後にコードフェンスや「記事生成完了」等の説明文が付くことがあるため）
     article_match = re.search(r"<article>.*?</article>", raw_content, re.DOTALL)
     if article_match:
         raw_content = article_match.group(0)
 
-    # プレースホルダーを実際のリンクに置換（URLが空の場合はテキストのみ）
     html_content = raw_content
-    for company, url in AFFILIATE_LINKS.items():
+    for company, url in affiliate_links.items():
         if url:
             html_content = html_content.replace(
                 f"{{{{{company}}}}}",
@@ -102,6 +176,7 @@ HTMLの <article> タグで全体を囲んでください。"""
 
     result = {
         "keyword": keyword,
+        "category": category,
         "html": html_content,
         "generated_at": datetime.now().isoformat(),
         "model": "claude-haiku-4-5-20251001",
