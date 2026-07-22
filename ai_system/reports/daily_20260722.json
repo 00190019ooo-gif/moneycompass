@@ -1,0 +1,32 @@
+{
+  "date": "2026-07-22",
+  "generated": 0,
+  "errors": 5,
+  "results": [
+    {
+      "keyword": "NISA おすすめ 証券口座 2026",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdGFrhzKMEusQrQrb54ox'}"
+    },
+    {
+      "keyword": "新NISA 始め方 初心者 手順",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdGFrijTp1448w9HMGuSW'}"
+    },
+    {
+      "keyword": "iDeCo 節税効果 計算 年収別",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdGFrjHx8nb5Catar2wPm'}"
+    },
+    {
+      "keyword": "楽天証券 SBI証券 比較 どっち",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdGFrjtfhCgMgCxRon5XF'}"
+    },
+    {
+      "keyword": "高配当株 おすすめ 銘柄 2026",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdGFrm191jNj3Ry886eUn'}"
+    }
+  ]
+}
