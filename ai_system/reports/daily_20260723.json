@@ -1,0 +1,32 @@
+{
+  "date": "2026-07-23",
+  "generated": 0,
+  "errors": 5,
+  "results": [
+    {
+      "keyword": "サラリーマン 節税 方法 一覧",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdJADkHd2BtXFitX7AP1e'}"
+    },
+    {
+      "keyword": "ふるさと納税 やり方 2026 初心者",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdJADm8iwfmZWSwStNh5g'}"
+    },
+    {
+      "keyword": "会社設立 手順 費用 株式会社",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdJADmkBZU4uG1m9bXPPF'}"
+    },
+    {
+      "keyword": "法人 節税 対策 おすすめ",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdJADnLu2dKEpqg7fjqa2'}"
+    },
+    {
+      "keyword": "米国ETF おすすめ 初心者 VOO VTI",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdJADnv8btiKdxo3EM53j'}"
+    }
+  ]
+}
