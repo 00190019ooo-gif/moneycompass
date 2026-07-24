@@ -1,0 +1,32 @@
+{
+  "date": "2026-07-24",
+  "generated": 0,
+  "errors": 5,
+  "results": [
+    {
+      "keyword": "株式投資 始め方 10万円 初心者",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdL3iobZJRd6x1afgDEm6'}"
+    },
+    {
+      "keyword": "iDeCo おすすめ 証券会社 比較",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdL3ipZ6zkYgnerHPrUdN'}"
+    },
+    {
+      "keyword": "投資信託 おすすめ 初心者 2026",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdL3iqQwy8WWXnPyBmdmy'}"
+    },
+    {
+      "keyword": "個人事業主 法人成り タイミング 年収",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdL3ir7s6smmTp4847aBG'}"
+    },
+    {
+      "keyword": "副業 確定申告 やり方 初めて",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdL3is5ASUgk9r9Qq2zY5'}"
+    }
+  ]
+}
