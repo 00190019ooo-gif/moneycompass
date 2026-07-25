@@ -1,0 +1,32 @@
+{
+  "date": "2026-07-25",
+  "generated": 0,
+  "errors": 5,
+  "results": [
+    {
+      "keyword": "つみたてNISA 銘柄 おすすめ 長期",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdMwUk8sAfdJ3yci6PDXx'}"
+    },
+    {
+      "keyword": "証券口座 比較 手数料 初心者",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdMwUkhbiRQe6mhbcWcgA'}"
+    },
+    {
+      "keyword": "役員報酬 節税 いくらが最適",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdMwUm4RrMjTXSA5C2Gec'}"
+    },
+    {
+      "keyword": "不動産投資 節税 仕組み 初心者",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdMwUmWDj6nmvDp3wbGiK'}"
+    },
+    {
+      "keyword": "確定申告 経費 一覧 フリーランス",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdMwUn7gPsDFy49eorcoM'}"
+    }
+  ]
+}
