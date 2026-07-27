@@ -1,0 +1,32 @@
+{
+  "date": "2026-07-27",
+  "generated": 0,
+  "errors": 5,
+  "results": [
+    {
+      "keyword": "プロミス 審査 落ちた 理由",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdRjyfVEyqHiPNhKZQSDs'}"
+    },
+    {
+      "keyword": "消費者金融 初めて 流れ 安心",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdRjygL6EzqmVnMVahmrP'}"
+    },
+    {
+      "keyword": "カードローン おまとめ 金利 安い",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdRjygxYepjTADWPqxjVU'}"
+    },
+    {
+      "keyword": "銀行カードローン 消費者金融 どっち",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdRjyhhwVab98RbVLTePK'}"
+    },
+    {
+      "keyword": "カードローン 無利息期間 比較 2026",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CdRjyiNNtVRhW5N3pxC1i'}"
+    }
+  ]
+}
